@@ -29,9 +29,9 @@ node {
 }
 
 task buildFrontend(type: YarnTask) {
-    outputs.upToDateWhen {
-        return file("$buildDir/dist").isDirectory()
-    }
+    // outputs.upToDateWhen {
+    //     return file("$buildDir/dist").isDirectory()
+    // }
     args = ['run', 'pbuild']
     dependsOn yarn_install
     dependsOn rootProject.tasks.getByName('openApiGenerate')

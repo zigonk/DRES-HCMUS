@@ -1,48 +1,48 @@
-<mat-card appearance="outlined">
+<!-- Mat card zero padding -->
+<mat-card class="left" [style.padding]="0">
   <mat-card-content>
     <div class="flex" [style.overflow-x]="'auto'">
       <div
-        *ngFor="let team of ((info | async)?.teams | orderBy:'asc':orderTeamsByName)"
+        *ngFor="let team of (info | async)?.teams"
         [style.background-color]="team.color + '44'"
         class="tile"
-        [@highlight]="(highlight | async).get(team.id)"
+        [@highlight]="(highlight | async).get(team.uid)"
         (@highlight.done)="resetHighlight.next()"
       >
-        <h3 [style.text-align]="'center'">{{ team.name }}</h3>
+        <p class="team-name">{{ team.name }}</p>
 
         <div></div>
-        <div [style.background-color]="team.color" class="logo">
-          <img src="{{ teamLogo(team.id) }}" />
-        </div>
+        <!-- <div [style.background-color]="team.color" class="logo">
+          <img src="{{ teamLogo(team) }}" />
+        </div> -->
         <div *ngIf="(state | async)?.taskStatus === 'ENDED' || (state | async)?.taskStatus === 'RUNNING'">
-          <p class="score" *ngIf="scores | async">
-            {{ (scores | async).get(team.id) | number: '1.0-0' }}
-          </p>
-
-          <p class="counter">
-            <span class="CORRECT">{{ correctSubmissions(team.id) | async }}</span> |
-            <span class="WRONG">{{ wrongSubmissions(team.id) | async }}</span> |
-            <span class="INDETERMINATE">{{ indeterminate(team.id) | async }}</span>
-          </p>
-
-          <div class="submissions">
-            <div *ngFor="let answer of submissionPreviews(team.id) | async; trackBy: previewById" [className]="'submission ' + answer.status">
-              <div [ngSwitch]="answer.type">
-                <div *ngSwitchCase="'ITEM'">
-                  <img *ngIf="answer.previewItem !== null && answer.previewStart !== null" src="{{previewOfItem(answer.previewItem, answer.previewStart)}}" alt="Preview for submission {{answer.submissionId}}." />
-                  <p *ngIf="answer.previewItem === null || answer.previewStart === null">?</p>
-                </div>
-                <div *ngSwitchCase="'TEMPORAL'">
-                  <img *ngIf="answer.previewItem !== null && answer.previewStart !== null" src="{{previewOfItem(answer.previewItem, answer.previewStart)}}" alt="Preview for submission {{answer.submissionId}}." />
-                  <p *ngIf="answer.previewItem === null || answer.previewStart === null">?</p>
-                </div>
-                <div *ngSwitchCase="'TEXT'">
-                  <img matTooltip="{{answer.previewText}}" src="/immutable/assets/images/text.png" alt="A texticon, the actual submission text is displayed via tooltip"/>
-                </div>
-              </div>
-            </div>
+          <div class="score-container">
+           
+            <p class="counter">
+              <span class="CORRECT score-box">{{ correctSubmissions(team.id) | async }}</span> 
+              <span class="WRONG score-box">{{ wrongSubmissions(team.id) | async }}</span> 
+              <!-- <span class="INDETERMINATE score-box">{{ indeterminate(team.uid) | async }}</span> -->
+            </p>
+            <p class="score score-box" *ngIf="scores | async">
+              {{ (scores | async).get(team.id) | number: '1.0-0' }}
+            </p>
           </div>
+
+          <!-- <div class="submissions">
+            <div
+              *ngFor="let submission of submissionForTeam(team.uid) | async; trackBy: trackSubmission"
+              [className]="'submission ' + submission.status"
+            >
+              <img
+                *ngIf="submission.id"
+                [src]="previewForSubmission(submission) | async"
+                [matTooltip]="tooltipForSubmission(submission)"
+              />
+              <p *ngIf="!submission.id">?</p>
+            </div>
+          </div> -->
         </div>
+
         <audio #audio_correct src="/immutable/assets/audio/correct.ogg" [muted]="(config.configAsObservable | async).effects.mute" hidden></audio>
         <audio #audio_wrong src="/immutable/assets/audio/wrong.ogg" [muted]="(config.configAsObservable | async).effects.mute" hidden></audio>
         <audio #audio_applause src="/immutable/assets/audio/applause.ogg" [muted]="(config.configAsObservable | async).effects.mute" hidden></audio>

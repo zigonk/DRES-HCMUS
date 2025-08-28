@@ -215,7 +215,7 @@ export class TeamsViewerComponent implements AfterViewInit, OnDestroy {
               this.playOnce(this.correct.nativeElement);
             } else if (value.wrong > value.correct) {
               highlight.set(key, 'wrong');
-              this.playOnce(this.wrong.nativeElement);
+              // this.playOnce(this.wrong.nativeElement);
             } else {
               highlight.set(key, 'nohighlight');
             }

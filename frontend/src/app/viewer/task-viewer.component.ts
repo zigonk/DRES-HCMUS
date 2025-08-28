@@ -91,6 +91,18 @@ export class TaskViewerComponent implements AfterViewInit, OnDestroy {
   /** The subscription associated with the current viewer state. */
   viewerStateSubscription: Subscription;
 
+  /** Function for click button */
+  toggleFullscreen: () => void = () => {
+    console.log('Toggle fullscreen');
+    // Get element class task-preview and toggle class fullscreen
+    document.querySelector('.task-preview').classList.toggle('fullscreen');
+    // Get video element and add class fullscreenVideo
+    const video = document.querySelector('video');
+    if (video) {
+      video.classList.toggle('fullscreen-video');
+    }
+  }
+
   /** Reference to the audio elements used during countdown. */
   @ViewChild('audio_beep_1') beep1: ElementRef<HTMLAudioElement>;
   @ViewChild('audio_beep_2') beep2: ElementRef<HTMLAudioElement>;

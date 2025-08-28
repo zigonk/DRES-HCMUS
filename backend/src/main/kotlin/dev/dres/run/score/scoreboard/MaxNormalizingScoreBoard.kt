@@ -96,7 +96,8 @@ class MaxNormalizingScoreBoard(override val name: String, override val run: Eval
 
         /* Update local score map. */
         this.lock.write {
-            this.scores = scoreSums.mapValues { it.value * maxScoreNormalized / maxScore }
+            this.scores = scoreSums.mapValues { it.value}
+            //  * maxScoreNormalized / maxScore }
             this.dirty = false
         }
 

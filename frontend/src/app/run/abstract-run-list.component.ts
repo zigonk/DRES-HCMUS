@@ -56,8 +56,10 @@ export class AbstractRunListComponent {
       runId,
       {
         center: 'player',
-        left: 'competition_score',
-        right: 'task_type_score',
+        left: null,
+        right: null,
+        // left: 'competition_score',
+        // right: 'task_type_score',
         bottom: 'team_score',
       },
     ]);

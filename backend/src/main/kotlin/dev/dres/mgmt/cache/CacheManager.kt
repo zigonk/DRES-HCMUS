@@ -387,12 +387,12 @@ class CacheManager(private val config: Config, private val store: TransientEntit
                 .setOverwriteOutput(true)
                 .addArguments("-ss", startTimecode)
                 .addArguments("-to", endTimecode)
-                .addArguments("-c:v", "libx264")
-                .addArguments("-c:a", "aac")
-                .addArguments("-b:v", "2000k")
-                .addArguments("-filter:v", "scale=${this@CacheManager.config.cache.previewVideoMaxSize}:-1")
-                .addArguments("-tune", "zerolatency")
-                .addArguments("-preset", "slow")
+                .addArguments("-c:v", "copy")
+                .addArguments("-c:a", "copy")
+                // .addArguments("-b:v", "2000k")
+                // .addArguments("-filter:v", "scale=${this@CacheManager.config.cache.previewVideoMaxSize}:-1")
+                // .addArguments("-tune", "zerolatency")
+                // .addArguments("-preset", "slow")
                 .setOutputListener { l -> LOGGER.debug(MARKER, l); }
                 .execute()
             this.output

@@ -1,14 +1,17 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { combineLatest, concat, Observable, of } from 'rxjs';
+import { combineLatest, concat, Observable, of, interval } from 'rxjs';
 import {
   ApexAxisChartSeries,
   ApexChart,
   ApexDataLabels,
   ApexFill,
+  ApexGrid,
   ApexLegend,
   ApexPlotOptions,
   ApexStroke,
   ApexTheme,
+  ApexXAxis,
+  ApexYAxis,
   ChartComponent
 } from 'ng-apexcharts';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -26,12 +29,14 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './scoreboard-viewer.component.html',
   styleUrls: ['./scoreboard-viewer.component.scss'],
 })
+
 export class ScoreboardViewerComponent implements OnInit {
   /**
    * The run info of the current run
-   */
-  @Input() info: Observable<ApiEvaluationInfo>;
-
+  */
+ @Input() info: Observable<ApiEvaluationInfo>;
+ 
+ fontSize = '30px';
   /**
    * The observable for the state, which is updated through a websocket
    */
@@ -45,8 +50,17 @@ export class ScoreboardViewerComponent implements OnInit {
 
   @ViewChild('chart') chartComponent: ChartComponent;
 
+  grid: ApexGrid = {
+    padding: {
+      top: 0,
+      right: 100,
+      bottom: 0,
+    },
+  } as ApexGrid;
+
   chart: ApexChart = {
     type: 'bar',
+    height: 7000,
     stacked: this.competitionOverview, // that's why the boolean is setup this way
     animations: {
       enabled: false,
@@ -64,7 +78,8 @@ export class ScoreboardViewerComponent implements OnInit {
           enabled: this.competitionOverview, //show total when bars are stacked
           offsetX: 5,
           style: {
-            color: '#fff'
+            color: '#fff',
+            fontSize: this.fontSize,
           }
         },
       }
@@ -73,7 +88,7 @@ export class ScoreboardViewerComponent implements OnInit {
 
   stroke: ApexStroke = {
     width: 1,
-    colors: ['#fff'],
+    colors: ['#f0f'],
   } as ApexStroke;
 
   fill: ApexFill = {
@@ -84,6 +99,7 @@ export class ScoreboardViewerComponent implements OnInit {
     position: 'top',
     horizontalAlign: 'left',
     showForSingleSeries: false,
+    // fontSize: this.fontSize,
   } as ApexLegend;
 
   theme: ApexTheme = {
@@ -93,10 +109,29 @@ export class ScoreboardViewerComponent implements OnInit {
 
   dataLabels: ApexDataLabels = {
     enabled: true,
+    position: 'center',
     dropShadow: {
         enabled: true
-    }
+    },
+    style: {
+      fontSize: this.fontSize,
+      colors: ['#fff'],
+    },
   } as ApexDataLabels;
+
+  yaxis: ApexYAxis = {
+    labels: {
+      show: true,
+      minWidth: 300,
+      maxWidth: 300,
+      offsetX: -20,
+      style: {
+        fontSize: '40px',
+        color: '#fff',
+      },
+    },
+  } as ApexYAxis;
+
 
   series: Observable<ApexAxisChartSeries>;
 

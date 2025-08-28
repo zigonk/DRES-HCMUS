@@ -1,5 +1,10 @@
 <mat-card appearance="outlined">
   <div class="task-preview">
+    <!--FULLSCREEN BUTTON-->
+    <button mat-icon-button (click)="toggleFullscreen()">
+      <mat-icon>fullscreen</mat-icon>
+    </button>
+
     <!-- VIEWER_UNKNOWN -->
     <div *ngIf="(viewerState | async) === 0">
       <h2 class="header">Initializing viewer... please wait!</h2>
@@ -24,9 +29,9 @@
     </div>
 
     <!-- VIEWER_PLAYBACK -->
-    <div *ngIf="(viewerState | async) === 4">
+    <div class="task-hint" *ngIf="(viewerState | async) === 4" >
       <h2 style="text-align: center">{{ currentTaskName | async }} ({{ toFormattedTime(timeLeft | async) }})</h2>
-      <div *ngIf="currentTaskHint | async">
+      <div class="task-hint" *ngIf="currentTaskHint | async" >
         <app-text-object-preview [queryContent]="currentHintContent"></app-text-object-preview>
         <app-video-object-preview [queryObject]="currentHintContent" [muted]="(config.configAsObservable | async).effects.mute"></app-video-object-preview>
         <app-image-object-preview [queryContent]="currentHintContent"></app-image-object-preview>
@@ -34,9 +39,9 @@
     </div>
 
     <!-- VIEWER_TASK_ENDED -->
-    <div *ngIf="(viewerState | async) === 5">
+    <div class="task-hint" *ngIf="(viewerState | async) === 5">
       <h2 class="header">{{ currentTaskName | async }} (Task complete)</h2>
-      <div *ngIf="currentTargetContent | async">
+      <div class="task-hint" *ngIf="currentTargetContent | async">
         <app-text-object-preview [queryContent]="currentTargetContent"></app-text-object-preview>
         <app-video-object-preview [queryObject]="currentTargetContent" [muted]="true"></app-video-object-preview>
         <app-image-object-preview [queryContent]="currentTargetContent"></app-image-object-preview>

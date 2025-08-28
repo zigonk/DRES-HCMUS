@@ -25,9 +25,9 @@ class KisTaskScorer(
     )
 
     companion object {
-        private const val defaultmaxPointsPerTask: Double = 1000.0
-        private const val defaultmaxPointsAtTaskEnd: Double = 500.0
-        private const val defaultpenaltyPerWrongSubmission: Double = 100.0
+        private const val defaultmaxPointsPerTask: Double = 100.0
+        private const val defaultmaxPointsAtTaskEnd: Double = 50.0
+        private const val defaultpenaltyPerWrongSubmission: Double = 10.0
     }
 
     /**

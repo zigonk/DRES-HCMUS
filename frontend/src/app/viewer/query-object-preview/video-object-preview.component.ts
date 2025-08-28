@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { filter, map } from 'rxjs/operators';
@@ -14,14 +14,16 @@ import {ApiContentElement, ApiHint} from '../../../../openapi';
         *ngIf="videoUrl | async"
         [src]="videoUrl | async"
         class="video-player"
-        style="width: 100%"
         controls
         [muted]="muted"
         (canplay)="handleCanPlay()"
         (ended)="handleEnded()"
+        (fullscreen)="handleFullscreen()"
       ></video>
     </div>
   `,
+  styleUrls: ['./video-object-preview.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class VideoObjectPreviewComponent implements OnInit {
   /** Observable of current {@link ContentElement} that should be displayed. Provided by user of this component. */
@@ -60,6 +62,13 @@ export class VideoObjectPreviewComponent implements OnInit {
    */
   public handleCanPlay() {
     this.player.nativeElement.play().then((s) => {});
+  }
+
+  /**
+   * Handles entering fullscreen mode in video player.
+   */
+  public handleFullscreen() {
+    this.player.nativeElement.requestFullscreen().then((s) => {});
   }
 
   /**

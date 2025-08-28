@@ -1,0 +1,19 @@
+.video-container video {
+    width: 100%;
+    height: auto;
+    // object-fit: contain;
+ }
+ 
+ .video-container {
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    height: 100%;
+ }
+
+ .fullscreen-video {
+    // Change to fill height instead of width
+    height: 90% !important;
+    width: auto !important;
+    object-fit: contain;
+}

@@ -92,8 +92,8 @@ export class RunAdminToolbarComponent implements OnInit {
       runId,
       {
         center: 'player',
-        left: 'competition_score',
-        right: 'task_type_score',
+        left: null,
+        right: null,
         bottom: 'team_score',
       },
     ]);

@@ -48,11 +48,15 @@ class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
         for (answer in answerSet.answers) {
             /* Perform sanity checks. */
             val text = answer.text
-            if (answer.type != DbAnswerType.TEXT || text == null) {
+            // Check len text > 3 -> remove 3 characters from the end
+            // Fix error:Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type String?
+            val panswer = text?.substring(0, text.length - 3)
+        
+            if (answer.type != DbAnswerType.TEXT || panswer == null) {
                 return
             }
 
-            if (!regex.any { it matches text }) {
+            if (!regex.any { it matches panswer }) {
                 return
             }
         }

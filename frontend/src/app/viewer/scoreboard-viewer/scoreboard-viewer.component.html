@@ -1,7 +1,7 @@
 <mat-card appearance="outlined">
   <mat-card-header>
     <mat-card-title>
-      <span *ngIf="competitionOverview">Normalized Competition Scores</span>
+      <span *ngIf="competitionOverview"> Competition Scores</span>
       <span *ngIf="!competitionOverview">Scores of {{ currentTaskGroup | async }}</span>
     </mat-card-title>
   </mat-card-header>
@@ -11,10 +11,12 @@
       [dataLabels]="dataLabels"
       [chart]="chart"
       [plotOptions]="plotOptions"
+      [yaxis]="yaxis"
       [stroke]="stroke"
       [fill]="fill"
       [legend]="legend"
       [theme]="theme"
+      [grid]="grid"
     >
     </apx-chart>
   </mat-card-content>
