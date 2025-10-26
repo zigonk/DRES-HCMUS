@@ -135,18 +135,20 @@ class SubmissionHandler(private val store: TransientEntityStore) : PostRestHandl
         /* Return status. */
 
         var correct = 0
+        var partiallyCorrect = 0
         var wrong = 0
         var undcidable = 0
         var indeterminate = 0
         apiSubmission.answers.map { it.status() }.forEach {
             when (it) {
                 VerdictStatus.CORRECT -> correct++
+                VerdictStatus.PARTIALLY_CORRECT -> partiallyCorrect++
                 VerdictStatus.WRONG -> wrong++
                 VerdictStatus.INDETERMINATE -> indeterminate++
                 VerdictStatus.UNDECIDABLE -> undcidable++
             }
         }
-        val max = listOf(correct, wrong, undcidable, indeterminate).max()
+        val max = listOf(correct, wrong, undcidable, indeterminate, partiallyCorrect).max()
         return when (max) {
             0 -> throw ErrorStatusException(
                 500,
@@ -155,6 +157,7 @@ class SubmissionHandler(private val store: TransientEntityStore) : PostRestHandl
             )
 
             correct -> SuccessfulSubmissionsStatus(ApiVerdictStatus.CORRECT, "Submission correct, well done!")
+            partiallyCorrect -> SuccessfulSubmissionsStatus(ApiVerdictStatus.PARTIALLY_CORRECT, "Submission partially correct, almost there!")
             wrong -> SuccessfulSubmissionsStatus(ApiVerdictStatus.WRONG, "Submission wrong, try again!")
             undcidable -> SuccessfulSubmissionsStatus(
                 ApiVerdictStatus.UNDECIDABLE,

@@ -33,6 +33,7 @@ data class ApiAnswerSet(
 
     override fun status(): VerdictStatus = when(this.status) {
         ApiVerdictStatus.CORRECT -> VerdictStatus.CORRECT
+        ApiVerdictStatus.PARTIALLY_CORRECT -> VerdictStatus.PARTIALLY_CORRECT
         ApiVerdictStatus.WRONG -> VerdictStatus.WRONG
         ApiVerdictStatus.INDETERMINATE -> VerdictStatus.INDETERMINATE
         ApiVerdictStatus.UNDECIDABLE -> VerdictStatus.UNDECIDABLE

@@ -43,20 +43,62 @@ class KisTaskScorer(
         val taskStartTime = this.scoreable.started ?: throw IllegalArgumentException("No task start time specified.")
         return this.scoreable.teams.associateWith { teamId ->
             val verdicts = submissions.filter { it.teamId == teamId }.sortedBy { it.timestamp }.flatMap { sub ->
-                sub.answerSets().filter { (it.status() == VerdictStatus.CORRECT) or (it.status() == VerdictStatus.WRONG) }
+                sub.answerSets().filter { (it.status() == VerdictStatus.CORRECT) or (it.status() == VerdictStatus.WRONG) or (it.status() == VerdictStatus.PARTIALLY_CORRECT)}
             }.toList()
-            val firstCorrect = verdicts.indexOfFirst { it.status() == VerdictStatus.CORRECT }
-            val score = if (firstCorrect > -1) {
-                val timeFraction = 1.0 - (verdicts[firstCorrect].submission.timestamp - taskStartTime) / taskDuration
-                max(
+            // Get max score where partially correct is treated as correct but get half of the score and half of penalty
+            var score = 0.0
+            var correct = 0
+            var partiallyCorrect = 0
+            var wrong = 0
+            var firstCorrectIndex = -1
+            var firstPartiallyCorrectIndex = -1
+            for ((index, verdict) in verdicts.withIndex()) {
+                when (verdict.status()) {
+                    VerdictStatus.CORRECT -> {
+                        correct++
+                        if (firstCorrectIndex == -1) {
+                            firstCorrectIndex = index
+                        }
+                    }
+                    VerdictStatus.PARTIALLY_CORRECT -> {
+                        partiallyCorrect++
+                        if (firstPartiallyCorrectIndex == -1) {
+                            firstPartiallyCorrectIndex = index
+                        }
+                    }
+                    VerdictStatus.WRONG -> wrong++
+                    else -> {}
+                }
+            }
+            if (firstCorrectIndex != -1) {
+                val timeFraction = 1.0 - (verdicts[firstCorrectIndex].submission.timestamp - taskStartTime) / taskDuration
+                score = max(
                     0.0,
                     this.maxPointsAtTaskEnd +
                             ((maxPointsPerTask - maxPointsAtTaskEnd) * timeFraction) -
-                            (firstCorrect * penaltyPerWrongSubmission) //index of first correct submission is the same as number of not correct submissions
+                            (firstCorrectIndex * penaltyPerWrongSubmission) //index of first correct submission is the same as number of not correct submissions
                 )
-            } else {
-                0.0
-            }
+            } else if (firstPartiallyCorrectIndex != -1) {
+                val timeFraction = 1.0 - (verdicts[firstPartiallyCorrectIndex].submission.timestamp - taskStartTime) / taskDuration
+                score = max(
+                    0.0,
+                    (this.maxPointsAtTaskEnd +
+                            ((maxPointsPerTask - maxPointsAtTaskEnd) * timeFraction) -
+                            (firstPartiallyCorrectIndex * penaltyPerWrongSubmission))
+                ) / 2.0
+            }   
+            // val firstCorrect = verdicts.indexOfFirst { it.status() == VerdictStatus.CORRECT }
+            // val score = if (firstCorrect > -1) {
+            //     val timeFraction = 1.0 - (verdicts[firstCorrect].submission.timestamp - taskStartTime) / taskDuration
+            //     max(
+            //         0.0,
+            //         this.maxPointsAtTaskEnd +
+            //                 ((maxPointsPerTask - maxPointsAtTaskEnd) * timeFraction) -
+            //                 (firstCorrect * penaltyPerWrongSubmission) //index of first correct submission is the same as number of not correct submissions
+            //     )
+            // } else {
+            //     0.0
+            // }
             score
         }
     }

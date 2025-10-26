@@ -33,6 +33,23 @@ class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
         }
     }
 
+    private fun parsingTrakeAnswer(answer: String?): Pair<String?, List<Int>?> {
+        if (answer == null) {
+            return Pair(null, null)
+        }
+        val parts = answer.split("-")
+        if (parts.size != 2) {
+            return Pair(null, null)
+        }
+        val videoId = parts[0]
+        val framesPart = parts[1]
+        val frames = framesPart.split(",").mapNotNull { it.trim().toIntOrNull() }
+        if (frames.isEmpty()) {
+            return Pair(videoId, null)
+        }
+        return Pair(videoId, frames)
+    }
+
     /**
      * Validates the [DbAnswerSet] and updates its [DBVerdictStatus].
      *
@@ -43,24 +60,64 @@ class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
     override fun validate(answerSet: DbAnswerSet) {
         /* Basically, we assume that the DBAnswerSet is wrong. */
         answerSet.status = DbVerdictStatus.WRONG
-
+        // Get task type by 2 first letters "QA" or "TR".
+        val taskType = regex.firstOrNull()?.pattern?.substring(0,2)
+        if (taskType == null || (taskType != "QA" && taskType != "TR")) {
+            return
+        }
+        var matchedFrames = 0;
+        var totalFrames = 0
         /* Now we check all the answers. */
         for (answer in answerSet.answers) {
             /* Perform sanity checks. */
             val text = answer.text
-            // Check len text > 3 -> remove 3 characters from the end
-            // Fix error:Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type String?
-            val panswer = text?.substring(0, text.length - 3)
-        
-            if (answer.type != DbAnswerType.TEXT || panswer == null) {
-                return
+            // If taskType is "QA", we do normal validation.
+            if (taskType == "QA") {
+                // Answer in format <ANSWER>-<VIDEO_ID>-<TIME(ms)>
+                val panswer = text?.substring(3, text.length - 3)
+                if (answer.type != DbAnswerType.TEXT || text == null) {
+                    return
+                }
+                if (!regex.any { it matches panswer!! }) {
+                    return
+                }
+                continue
             }
-
-            if (!regex.any { it matches panswer }) {
-                return
+            else if (taskType == "TR") { // If taskType is "TR", we do split
+                // Parsing the answer in format <VIDEO_ID>-<FRAME1,FRAME2,...>
+                val (videoId, frames) = parsingTrakeAnswer(text?.substring(3, text.length))
+                // Parsing ground truth in format <VIDEO_ID>-<FRAME1,FRAME2,...>
+                val (gtVideoId, gtFrames) = parsingTrakeAnswer(regex.first().pattern)
+                if (answer.type != DbAnswerType.TEXT || text == null || videoId == null || frames == null || gtVideoId == null || gtFrames == null) {
+                    return
+                }
+                // Check if video IDs match.
+                if (videoId != gtVideoId) {
+                    return
+                }
+                // Check frame-by-frame in order with tolerance of 12 frames.
+                val tolerance = 12
+                totalFrames = frames.size
+                for (i in 1..frames.size) {
+                    val frame = frames[i - 1]
+                    val gtFrame = gtFrames.getOrNull(i - 1)
+                    if (gtFrame == null || frame !in (gtFrame - tolerance)..(gtFrame + tolerance)) {
+                        continue
+                    } else {
+                        matchedFrames++
+                    }
+                }
             }
         }
-
+        if (taskType == "TR") {
+            val matchRatio = if (totalFrames == 0) 0.0 else matchedFrames.toDouble() / totalFrames
+            answerSet.status = when {
+                matchRatio >= 1.0 -> DbVerdictStatus.CORRECT
+                matchRatio >= 0.5 -> DbVerdictStatus.PARTIALLY_CORRECT
+                else -> DbVerdictStatus.WRONG
+            }
+            return
+        }
         /* If code reaches this point, the [DbAnswerSet] is correct. */
         answerSet.status = DbVerdictStatus.CORRECT
     }
