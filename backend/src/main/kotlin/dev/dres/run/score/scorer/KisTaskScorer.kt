@@ -78,14 +78,15 @@ class KisTaskScorer(
                             ((maxPointsPerTask - maxPointsAtTaskEnd) * timeFraction) -
                             (firstCorrectIndex * penaltyPerWrongSubmission) //index of first correct submission is the same as number of not correct submissions
                 )
-            } else if (firstPartiallyCorrectIndex != -1) {
+            }
+            if (firstPartiallyCorrectIndex != -1) {
                 val timeFraction = 1.0 - (verdicts[firstPartiallyCorrectIndex].submission.timestamp - taskStartTime) / taskDuration
                 score = max(
-                    0.0,
+                    score,
                     (this.maxPointsAtTaskEnd +
                             ((maxPointsPerTask - maxPointsAtTaskEnd) * timeFraction) -
-                            (firstPartiallyCorrectIndex * penaltyPerWrongSubmission))
-                ) / 2.0
+                            (firstPartiallyCorrectIndex * penaltyPerWrongSubmission)) / 2.0
+                ) 
             }   
             // val firstCorrect = verdicts.indexOfFirst { it.status() == VerdictStatus.CORRECT }
             // val score = if (firstCorrect > -1) {

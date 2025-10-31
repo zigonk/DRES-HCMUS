@@ -116,7 +116,11 @@ dependencies {
 kapt {
     correctErrorTypes true
     useBuildCache true
-    targetCompatibility = 11
+    javacOptions {
+        option("-source", "11")
+        option("-target", "11")
+    }
+    includeCompileClasspath = false
 }
 
 

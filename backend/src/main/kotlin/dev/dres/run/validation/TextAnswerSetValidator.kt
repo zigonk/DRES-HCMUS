@@ -33,22 +33,22 @@ class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
         }
     }
 
-    private fun parsingTrakeAnswer(answer: String?): Pair<String?, List<Int>?> {
-        if (answer == null) {
-            return Pair(null, null)
+        private fun parsingTrakeAnswer(answer: String?): Pair<String?, List<Int>?> {
+            if (answer == null) {
+                return Pair(null, null)
+            }
+            val parts = answer.split("-")
+            if (parts.size != 2) {
+                return Pair(null, null)
+            }
+            val videoId = parts[0]
+            val framesPart = parts[1]
+            val frames = framesPart.split(",").mapNotNull { it.trim().toIntOrNull() }
+            if (frames.isEmpty()) {
+                return Pair(videoId, null)
+            }
+            return Pair(videoId, frames)
         }
-        val parts = answer.split("-")
-        if (parts.size != 2) {
-            return Pair(null, null)
-        }
-        val videoId = parts[0]
-        val framesPart = parts[1]
-        val frames = framesPart.split(",").mapNotNull { it.trim().toIntOrNull() }
-        if (frames.isEmpty()) {
-            return Pair(videoId, null)
-        }
-        return Pair(videoId, frames)
-    }
 
     /**
      * Validates the [DbAnswerSet] and updates its [DBVerdictStatus].
