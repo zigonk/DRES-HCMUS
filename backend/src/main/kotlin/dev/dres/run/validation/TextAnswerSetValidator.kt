@@ -105,8 +105,7 @@ class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
                 }
                 
                 // Check if answer, video ID match and time is within range
-                if (submittedAnswer == gtAnswer && submittedVideoId == gtVideoId && submittedTime in gtStart..gtEnd) {
-                    answerSet.status = DbVerdictStatus.CORRECT
+                if (submittedAnswer != gtAnswer || submittedVideoId != gtVideoId || submittedTime !in gtStart..gtEnd) {
                     return
                 }
             }
