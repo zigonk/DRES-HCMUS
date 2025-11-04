@@ -74,14 +74,41 @@ class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
             // If taskType is "QA", we do normal validation.
             if (taskType == "QA") {
                 // Answer in format <ANSWER>-<VIDEO_ID>-<TIME(ms)>
-                val panswer = text?.substring(3, text.length - 3)
+                // Ground truth in format <ANSWER>-<VIDEO_ID>-<START>-<END>
                 if (answer.type != DbAnswerType.TEXT || text == null) {
                     return
                 }
-                if (!regex.any { it matches panswer!! }) {
+                val panswer = text.substring(3, text.length)
+                val answerParts = panswer.split("-")
+                if (answerParts.size != 3) {
                     return
                 }
-                continue
+                val submittedAnswer = answerParts[0]
+                val submittedVideoId = answerParts[1]
+                val submittedTime = answerParts[2].toIntOrNull()
+                if (submittedTime == null) {
+                    return
+                }
+                
+                // Parse ground truth pattern
+                val gtPattern = regex.first().pattern
+                val gtParts = gtPattern.split("-")
+                if (gtParts.size != 4) {
+                    return
+                }
+                val gtAnswer = gtParts[0]
+                val gtVideoId = gtParts[1]
+                val gtStart = gtParts[2].toIntOrNull()
+                val gtEnd = gtParts[3].toIntOrNull()
+                if (gtStart == null || gtEnd == null) {
+                    return
+                }
+                
+                // Check if answer, video ID match and time is within range
+                if (submittedAnswer == gtAnswer && submittedVideoId == gtVideoId && submittedTime in gtStart..gtEnd) {
+                    answerSet.status = DbVerdictStatus.CORRECT
+                    return
+                }
             }
             else if (taskType == "TR") { // If taskType is "TR", we do split
                 // Parsing the answer in format <VIDEO_ID>-<FRAME1,FRAME2,...>
