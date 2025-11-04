@@ -2,53 +2,47 @@ package dev.dres.run.validation
 
 import dev.dres.data.model.submissions.*
 import dev.dres.run.validation.interfaces.AnswerSetValidator
-import kotlinx.dnq.query.iterator
 
 /**
- * A [AnswerSetValidator] class that validates textual submissions based on [Regex].
+ * A [AnswerSetValidator] class that validates textual submissions.
+ * Supports QA (Question-Answer) and TR (Tracking) task types.
  *
  * @author Luca Rossetto
  * @author Ralph Gasser
- * @version 2.0.0
+ * @version 3.0.0
  */
 class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
 
     override val deferring = false
 
     /**
-     * Transforms the targets to [Regex]s.
-     * There is the convention introduced, that targets padded in backslashes (single) (\)
-     * are interpreted as regular expressions and the enclosing backslashes are removed.
-     * Ending a target string with '\i' will cause capitalization to be ignored.
-     * Regular Java pattern compilation rules apply.
-     * If the enclosing backslashes are missing, then the target is treated as a literal string.
-     *
-     * [RegexOption.CANON_EQ] is activated for both, regex and literals.
+     * Ground truth targets stored as strings (no regex needed).
+     * Format: <TASK_TYPE>:<DATA>
+     * - QA: QA:<ANSWER>-<VIDEO_ID>-<START>-<END>
+     * - TR: TR:<VIDEO_ID>-<FRAME1,FRAME2,...>
      */
-    private val regex = targets.map {
-        when {
-            it.startsWith("\\") && it.endsWith("\\") -> Regex(it.substring(1, it.length - 1), RegexOption.CANON_EQ)
-            it.startsWith("\\") && it.endsWith("\\i") ->Regex(it.substring(1, it.length - 2), setOf(RegexOption.CANON_EQ, RegexOption.IGNORE_CASE))
-            else -> Regex(it, setOf(RegexOption.CANON_EQ, RegexOption.LITERAL))
-        }
-    }
+    private val targets = targets
 
-        private fun parsingTrakeAnswer(answer: String?): Pair<String?, List<Int>?> {
-            if (answer == null) {
-                return Pair(null, null)
-            }
-            val parts = answer.split("-")
-            if (parts.size != 2) {
-                return Pair(null, null)
-            }
-            val videoId = parts[0]
-            val framesPart = parts[1]
-            val frames = framesPart.split(",").mapNotNull { it.trim().toIntOrNull() }
-            if (frames.isEmpty()) {
-                return Pair(videoId, null)
-            }
-            return Pair(videoId, frames)
+    /**
+     * Parses tracking answer format: <VIDEO_ID>-<FRAME1,FRAME2,...>
+     * @return Pair of video ID and list of frame numbers, or nulls if parsing fails
+     */
+    private fun parsingTrakeAnswer(answer: String?): Pair<String?, List<Int>?> {
+        if (answer == null) {
+            return Pair(null, null)
         }
+        val parts = answer.split("-", limit = 2)
+        if (parts.size != 2) {
+            return Pair(null, null)
+        }
+        val videoId = parts[0]
+        val framesPart = parts[1]
+        val frames = framesPart.split(",").mapNotNull { it.trim().toIntOrNull() }
+        if (frames.isEmpty()) {
+            return Pair(videoId, null)
+        }
+        return Pair(videoId, frames)
+    }
 
     /**
      * Validates the [DbAnswerSet] and updates its [DBVerdictStatus].
@@ -60,12 +54,20 @@ class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
     override fun validate(answerSet: DbAnswerSet) {
         /* Basically, we assume that the DBAnswerSet is wrong. */
         answerSet.status = DbVerdictStatus.WRONG
-        // Get task type by 2 first letters "QA" or "TR".
-        val taskType = regex.firstOrNull()?.pattern?.substring(0,2)
-        if (taskType == null || (taskType != "QA" && taskType != "TR")) {
+        
+        // Get the first target to determine task type
+        val firstTarget = targets.firstOrNull()
+        if (firstTarget == null || firstTarget.length < 3) {
             return
         }
-        var matchedFrames = 0;
+        
+        // Get task type by 2 first letters "QA" or "TR".
+        val taskType = firstTarget.substring(0, 2)
+        if (taskType != "QA" && taskType != "TR") {
+            return
+        }
+        
+        var matchedFrames = 0
         var totalFrames = 0
         /* Now we check all the answers. */
         for (answer in answerSet.answers) {
@@ -90,8 +92,8 @@ class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
                     return
                 }
                 
-                // Parse ground truth pattern
-                val gtPattern = regex.first().pattern
+                // Parse ground truth (remove "QA-" prefix)
+                val gtPattern = firstTarget.substring(3)
                 val gtParts = gtPattern.split("-")
                 if (gtParts.size != 4) {
                     return
@@ -113,7 +115,7 @@ class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
                 // Parsing the answer in format <VIDEO_ID>-<FRAME1,FRAME2,...>
                 val (videoId, frames) = parsingTrakeAnswer(text?.substring(3, text.length))
                 // Parsing ground truth in format <VIDEO_ID>-<FRAME1,FRAME2,...>
-                val (gtVideoId, gtFrames) = parsingTrakeAnswer(regex.first().pattern)
+                val (gtVideoId, gtFrames) = parsingTrakeAnswer(firstTarget.substring(3))
                 if (answer.type != DbAnswerType.TEXT || text == null || videoId == null || frames == null || gtVideoId == null || gtFrames == null) {
                     return
                 }
@@ -124,12 +126,10 @@ class TextAnswerSetValidator(targets: List<String>) : AnswerSetValidator {
                 // Check frame-by-frame in order with tolerance of 12 frames.
                 val tolerance = 12
                 totalFrames = frames.size
-                for (i in 1..frames.size) {
-                    val frame = frames[i - 1]
-                    val gtFrame = gtFrames.getOrNull(i - 1)
-                    if (gtFrame == null || frame !in (gtFrame - tolerance)..(gtFrame + tolerance)) {
-                        continue
-                    } else {
+                for (i in frames.indices) {
+                    val frame = frames[i]
+                    val gtFrame = gtFrames.getOrNull(i)
+                    if (gtFrame != null && frame in (gtFrame - tolerance)..(gtFrame + tolerance)) {
                         matchedFrames++
                     }
                 }
