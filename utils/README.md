@@ -10,7 +10,9 @@ This directory contains tools for bidirectional conversion between CSV files and
 CSV File ←→ JSON Evaluation Template
 ```
 ## Limitations
-- Can't auto import MEDIA_ITEM due to lack of ID in database
+- Automatic import of video/media items ("MEDIA_ITEM") is not supported because the required unique IDs for each media file are not available in the database; users must manually ensure that referenced video filenames in the CSV match the collection in DRES, and update the generated JSON with correct media IDs if necessary.
+- Task type and task group are currently fixed to `"qa-kis"`, `"tkis"`, `"vkis"`, and `"trake"` for type, and `"default"` for group.  
+  To use different types or groups, edit the relevant assignment in `csv_parser.py` (e.g., change `row["query_type"] = "qa"`) and in `task_builders.py`.
 
 ## Files
 
