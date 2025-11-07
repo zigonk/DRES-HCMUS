@@ -56,10 +56,15 @@ def build_tkis_task(row):
     accumulated_hints = []
     for i, hint_part in enumerate(hint_parts):
         accumulated_hints.append(hint_part)
+        # If last hint, end = duration
+        if i == len(hint_parts) - 1:
+            end_time = int(row.get('duration') or 300)
+        else:
+            end_time = (i + 1) * 60
         hints.append({
             "type": "TEXT",
             "start": i * 60,
-            "end": (i + 1) * 60,
+            "end": end_time,
             "description": " ".join(accumulated_hints),
             "dataType": "text/plain"
         })
@@ -164,10 +169,14 @@ def build_qa_or_trake_task(row, kind='qa-kis'):
     if kind == 'qa-kis':
         # qa-kis: split hints on semicolons into separate TEXT hints
         for i, hint_part in enumerate(hint_parts):
+            if i == len(hint_parts) - 1:
+                end_time = int(row.get('duration') or 300)
+            else:
+                end_time = (i + 1) * 60
             hints.append({
                 "type": "TEXT",
                 "start": i * 60,
-                "end": (i + 1) * 60,
+                "end": end_time,
                 "description": hint_part,
                 "dataType": "text/plain"
             })
@@ -230,6 +239,7 @@ def build_vkis_task(row):
         Task dictionary with MEDIA_ITEM_TEMPORAL_RANGE target
     """
     # For vkis we mirror the TKIS structure but mark taskType and taskGroup as Visual Known Item Search
+    row['duration'] = 240  # Set default duration to 240 seconds for VKIS
     t = build_tkis_task(row)
     t['taskType'] = 'Visual Known Item Search'
     t['taskGroup'] = 'vkis'
