@@ -45,6 +45,8 @@ DEFAULT_COLLECTION_ID = "your-collection-uuid-here"
 python csv2eval_template.py -i input.csv -o output.json
 ```
 
+Copy "tasks" in output.json and replace "tasks" in sample_eval_template.json to have a complete evaluation template.
+
 ### CSV Format
 
 The tool supports CSV files with the following columns:
