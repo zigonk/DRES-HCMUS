@@ -9,6 +9,8 @@ This directory contains tools for bidirectional conversion between CSV files and
 ```
 CSV File ←→ JSON Evaluation Template
 ```
+## Limitations
+- Can't auto import MEDIA_ITEM due to lack of ID in database
 
 ## Files
 
@@ -25,7 +27,6 @@ CSV File ←→ JSON Evaluation Template
 
 ### Documentation
 
-- **`REFACTORING_SUMMARY.md`** - Details about the modular architecture
 - **`sample_eval_template.json`** - Example DRES JSON template
 - **`sample_eval_template.csv`** - Example CSV format
 
@@ -35,6 +36,11 @@ CSV File ←→ JSON Evaluation Template
 
 ### Usage
 
+
+Edit `dres_utils.py` to change the default collection (currently use of AIC2025). Export evaluation template on the system to see collection ID:
+```python
+DEFAULT_COLLECTION_ID = "your-collection-uuid-here"
+```
 ```bash
 python csv2eval_template.py -i input.csv -o output.json
 ```
@@ -94,17 +100,6 @@ ID,QID,Query Type,Query Name,Description,Trans,Video Filename,Second Start,Secon
 4,4,trake,query-trake-01,Cảnh lắp ráp xe,,L26_V176,,,,,4725;4875;5020
 ```
 
-### Features
-
-- ✅ **Automatic field mapping** from CSV columns to DRES schema
-- ✅ **Time conversion** from seconds to milliseconds
-- ✅ **Smart hint handling** with question extraction for QA tasks
-- ✅ **Multiple CSV format support** (explicit task type, query type, inferred)
-- ✅ **Media name extraction** from video filenames
-- ✅ **Frame to millisecond conversion** (optional, with FPS parameter)
-
----
-
 ## JSON to CSV Conversion
 
 ### Usage
@@ -112,25 +107,6 @@ ID,QID,Query Type,Query Name,Description,Trans,Video Filename,Second Start,Secon
 ```bash
 python eval_template2csv.py -i input.json -o output.csv
 ```
-
-### Features
-
-- ✅ **Reverse conversion** from DRES JSON back to editable CSV
-- ✅ **Time conversion** from milliseconds back to seconds
-- ✅ **Target parsing** extracts answers, video names, time ranges
-- ✅ **Frame list extraction** for Trake tasks
-- ✅ **Hint consolidation** merges multiple hint blocks
-- ✅ **Sequential ID generation** for tracking
-
-### Output Format
-
-The generated CSV follows the same format as the input CSV for `csv2eval_template.py`, allowing for round-trip conversion:
-
-```
-CSV → JSON → CSV (editable) → JSON
-```
-
----
 
 ## Modular Architecture
 
@@ -204,137 +180,8 @@ python csv2eval_template.py -i tasks_edited.csv -o evaluation_v2.json
 6. **Make changes** in spreadsheet
 7. **Re-convert**: `python csv2eval_template.py -i tasks.csv -o eval_v2.json`
 
----
 
-## Validation
 
-### CSV Validation
-The tool automatically validates:
-- Required fields are present
-- Time ranges are valid numbers
-- Query type is supported
-- Video filenames are specified
 
-### JSON Output
-Generated JSON conforms to DRES schema:
-- Valid UUID for each task
-- Proper taskGroup and taskType mapping
-- Millisecond time units
-- Correct target structure (TEXT or MEDIA_ITEM_TEMPORAL_RANGE)
 
----
 
-## Testing
-
-Test the conversion tools:
-
-```bash
-# Test CSV to JSON conversion
-python csv2eval_template.py -i sample_eval_template.csv -o /tmp/test_output.json
-
-# Verify task counts
-python -c "import json; data=json.load(open('/tmp/test_output.json')); print(f'Total tasks: {len(data[\"tasks\"])}')"
-
-# Test round-trip conversion
-python eval_template2csv.py -i sample_eval_template.json -o /tmp/roundtrip.csv
-python csv2eval_template.py -i /tmp/roundtrip.csv -o /tmp/roundtrip.json
-```
-
----
-
-## Tips & Best Practices
-
-### CSV Creation
-1. **Use semicolons** (`;`) to separate multiple hints in Description column
-2. **Include question marks** (`?`) in QA descriptions for automatic question detection
-3. **Use consistent video naming** (e.g., `L08_V026` or `L08_V026.mp4`)
-4. **Specify times in seconds** (easier to read than milliseconds)
-5. **For Trake tasks**, list frames in Frame List column separated by semicolons
-
-### Hint Formatting
-- **TKIS/VKIS**: Hints accumulate over time blocks (0-60s, 60-120s, 120s+)
-- **QA**: Questions are automatically extracted and repeated with each hint
-- **Trake**: Single hint block, not split
-
-### Common Issues
-- **Missing video files**: Ensure Video Filename is specified
-- **Invalid time ranges**: Start must be less than End
-- **Wrong Query Type**: Use `qa`, `tkis`, `vkis`, or `trake` (lowercase)
-- **Empty answers for QA**: QA tasks require the `Ans` column
-
----
-
-## Advanced Usage
-
-### Custom Collection ID
-Edit `dres_utils.py` to change the default collection:
-```python
-DEFAULT_COLLECTION_ID = "your-collection-uuid-here"
-```
-
-### Custom FPS for Frame Conversion
-If using frame numbers, specify FPS in code:
-```python
-frames_to_ms(frame_number, fps=25)  # Default is 30
-```
-
-### Batch Processing
-```bash
-# Convert multiple CSV files
-for csv in *.csv; do
-    python csv2eval_template.py -i "$csv" -o "${csv%.csv}.json"
-done
-```
-
----
-
-## Troubleshooting
-
-### "Could not infer task"
-- Check that Query Type column has valid value (`qa`, `tkis`, `vkis`, `trake`)
-- Verify required fields are present (Video Filename, time ranges)
-
-### "Fields not in fieldnames"
-- Ensure CSV has all required columns
-- Check for typos in column headers
-
-### Time conversion issues
-- Verify Second Start/End are numeric values
-- Check that times are in seconds, not milliseconds
-
-### Missing hints
-- Check Description or Trans columns are populated
-- Verify semicolons separate multiple hints
-
----
-
-## Version History
-
-- **v2.0** - Modular refactoring with separate modules
-- **v1.5** - Added bidirectional conversion (JSON to CSV)
-- **v1.0** - Initial CSV to JSON converter
-
----
-
-## Contributing
-
-When adding new features:
-1. Update relevant module (`csv_parser.py`, `task_builders.py`, etc.)
-2. Add tests for new functionality
-3. Update this README with new features/usage
-4. Update `REFACTORING_SUMMARY.md` if architecture changes
-
----
-
-## Support
-
-For issues or questions:
-- Check `REFACTORING_SUMMARY.md` for architecture details
-- Review sample files: `sample_eval_template.csv` and `sample_eval_template.json`
-- Examine test outputs in `/tmp/` for debugging
-
----
-
-## License
-
-Part of the DRES (Distributed Retrieval Evaluation Server) project.
