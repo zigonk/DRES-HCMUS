@@ -48,7 +48,35 @@ python csv2eval_template.py -i input.csv -o output.json
 ```
 
 Copy "tasks" in output.json and replace "tasks" in sample_eval_template.json to have a complete evaluation template.
+### Workflow Example
 
+1. **Create tasks in spreadsheet** (Excel, Google Sheets)
+2. **Export to CSV** with required columns
+3. **Create task type and group** on DRES system with group names and task types as follows:
+```
+  {
+   "name": "tkis", #task group name
+   "type": "Textual Known Item Search"
+  },
+  {
+   "name": "qa-kis",  #task group name
+   "type": "qa-kis"
+  },
+  {
+   "name": "trake",  #task group name
+   "type": "trake"
+  },
+  {
+   "name": "vkis",  #task group name
+   "type": "Visual Known Item Search"
+  }
+```
+4. **Export template to JSON** from DRES to get the full structure
+5. **Convert to JSON**: `python csv2eval_template.py -i tasks.csv -o eval.json`
+6. **Replace "tasks"** in exported JSON with generated tasks from eval.json
+7. **Create new template and Import to DRES** system with updated eval.json
+8. **Update media ID** on DRES for each task
+9. **Save and start evaluation!**
 ### CSV Format
 
 The tool supports CSV files with the following columns:
@@ -174,15 +202,7 @@ python eval_template2csv.py -i evaluation.json -o tasks.csv
 python csv2eval_template.py -i tasks_edited.csv -o evaluation_v2.json
 ```
 
-### Workflow Example
 
-1. **Create tasks in spreadsheet** (Excel, Google Sheets)
-2. **Export to CSV** with required columns
-3. **Convert to JSON**: `python csv2eval_template.py -i tasks.csv -o eval.json`
-4. **Import to DRES** system for evaluation
-5. **Later, extract back to CSV** for editing: `python eval_template2csv.py -i eval.json -o tasks.csv`
-6. **Make changes** in spreadsheet
-7. **Re-convert**: `python csv2eval_template.py -i tasks.csv -o eval_v2.json`
 
 
 
