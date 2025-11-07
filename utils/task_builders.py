@@ -48,9 +48,21 @@ def build_tkis_task(row):
     end_ms = row.get('end_ms') or ''
 
     # hints: guideline expects three fixed time blocks for TKIS
-    # Try 'trans' first (English), fallback to 'description' (Vietnamese)
-    hint_text = row.get('trans') or row.get('description', '')
-    hint_parts = split_hints(hint_text)
+    # Hint in both english and vietnamese
+    vie_raw_hints = row.get('description') or ''
+    eng_raw_hints = row.get('trans') or ''
+    # Hint parts from both languages
+    vie_hint_parts = split_hints(vie_raw_hints)
+    eng_hint_parts = split_hints(eng_raw_hints)
+    # Combine hint parts by index respectively
+    hint_parts = []
+    max_parts = max(len(vie_hint_parts), len(eng_hint_parts))
+    for i in range(max_parts):
+        vie_part = vie_hint_parts[i] if i < len(vie_hint_parts) else ''
+        eng_part = eng_hint_parts[i] if i < len(eng_hint_parts) else ''
+        combined_part = '\n'.join(filter(None, [eng_part, vie_part]))
+        if combined_part:
+            hint_parts.append(combined_part)
     hints = []
     # Map up to 3 hint pieces to the given ranges 0-60,60-120,120+ (seconds)
     accumulated_hints = []
@@ -161,9 +173,21 @@ def build_qa_or_trake_task(row, kind='qa-kis'):
         frames = frames.replace(';', ',')
         target_text = f'TR-{media_name}-{frames}'
 
-    # Try 'trans' first (English), fallback to 'description' (Vietnamese)
-    raw_hints = row.get('trans') or row.get('description', '')
-    hint_parts = split_hints(raw_hints)
+    # Hint in both english and vietnamese
+    vie_raw_hints = row.get('description') or ''
+    eng_raw_hints = row.get('trans') or ''
+    # Hint parts from both languages
+    vie_hint_parts = split_hints(vie_raw_hints)
+    eng_hint_parts = split_hints(eng_raw_hints)
+    # Combine hint parts by index respectively
+    hint_parts = []
+    max_parts = max(len(vie_hint_parts), len(eng_hint_parts))
+    for i in range(max_parts):
+        vie_part = vie_hint_parts[i] if i < len(vie_hint_parts) else ''
+        eng_part = eng_hint_parts[i] if i < len(eng_hint_parts) else ''
+        combined_part = '\n'.join(filter(None, [eng_part, vie_part]))
+        if combined_part:
+            hint_parts.append(combined_part)
     hints = []
 
     if kind == 'qa-kis':
@@ -182,6 +206,7 @@ def build_qa_or_trake_task(row, kind='qa-kis'):
             })
     else:
         # trake: do not split; put entire hints string as one TEXT hint
+        raw_hints = '\n'.join([vie_raw_hints, eng_raw_hints]).strip()
         if raw_hints:
             hints.append({
                 "type": "TEXT",
