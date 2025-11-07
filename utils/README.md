@@ -10,8 +10,8 @@ This directory contains tools for bidirectional conversion between CSV files and
 CSV File ←→ JSON Evaluation Template
 ```
 ## Limitations
-- Automatic import of video/media items ("MEDIA_ITEM") is not supported because the required unique IDs for each media file are not available in the database; users must manually ensure that referenced video filenames in the CSV match the collection in DRES, and update the generated JSON with correct media IDs if necessary.
-- Task type and task group are currently fixed to `"qa-kis"`, `"tkis"`, `"vkis"`, and `"trake"` for type, and `"default"` for group.  
+- Automatic import of video/media items ("MEDIA_ITEM") is not supported because the required unique IDs for each media file are not available in the database.
+- Task type and task group are currently fixed to `"qa-kis"`, `"tkis"`, `"vkis"`, and `"trake"` for group. Please see below workflow to create these on your DRES system. 
   To use different types or groups, edit the relevant assignment in `csv_parser.py` (e.g., change `row["query_type"] = "qa"`) and in `task_builders.py`.
 
 ## Files
@@ -71,10 +71,10 @@ Copy "tasks" in output.json and replace "tasks" in sample_eval_template.json to 
    "type": "Visual Known Item Search"
   }
 ```
-4. **Export template to JSON** from DRES to get the full structure
+4. **Export template to JSON** from DRES to get the full structure in file `template.json`
 5. **Convert to JSON**: `python csv2eval_template.py -i tasks.csv -o eval.json`
 6. **Replace "tasks"** in exported JSON with generated tasks from eval.json
-7. **Create new template and Import to DRES** system with updated eval.json
+7. **Create new template and Import to DRES** system with updated `template.json` (this helps prevent duplicate task type/group issues)
 8. **Update media ID** on DRES for each task
 9. **Save and start evaluation!**
 ### CSV Format
