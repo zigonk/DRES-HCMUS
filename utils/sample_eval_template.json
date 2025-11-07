@@ -1,0 +1,457 @@
+{
+ "id": "d782ce89-7675-4b67-9a9f-9bc168312ee5",
+ "name": "PreContest",
+ "description": "Pre Contest ",
+ "created": 1762424989605,
+ "modified": 1762430835675,
+ "taskTypes": [
+  {
+   "name": "Textual Known Item Search",
+   "duration": 300,
+   "targetOption": "SINGLE_MEDIA_SEGMENT",
+   "hintOptions": [
+    "TEXT"
+   ],
+   "submissionOptions": [
+    "NO_DUPLICATES",
+    "TEMPORAL_SUBMISSION"
+   ],
+   "taskOptions": [
+    "HIDDEN_RESULTS"
+   ],
+   "scoreOption": "KIS",
+   "configuration": {
+    "LIMIT_CORRECT_PER_TEAM.limit": "1"
+   }
+  },
+  {
+   "name": "qa-kis",
+   "duration": 300,
+   "targetOption": "TEXT",
+   "hintOptions": [
+    "TEXT"
+   ],
+   "submissionOptions": [
+    "NO_DUPLICATES",
+    "TEXTUAL_SUBMISSION"
+   ],
+   "taskOptions": [
+    "HIDDEN_RESULTS"
+   ],
+   "scoreOption": "KIS",
+   "configuration": {
+    "LIMIT_CORRECT_PER_TEAM.limit": "1"
+   }
+  },
+  {
+   "name": "trake",
+   "duration": 300,
+   "targetOption": "TEXT",
+   "hintOptions": [
+    "TEXT"
+   ],
+   "submissionOptions": [
+    "NO_DUPLICATES",
+    "TEXTUAL_SUBMISSION"
+   ],
+   "taskOptions": [
+    "HIDDEN_RESULTS"
+   ],
+   "scoreOption": "KIS",
+   "configuration": {
+    "LIMIT_CORRECT_PER_TEAM.limit": "1"
+   }
+  },
+  {
+   "name": "Visual Known Item Search",
+   "duration": 240,
+   "targetOption": "SINGLE_MEDIA_SEGMENT",
+   "hintOptions": [
+    "VIDEO_ITEM_SEGMENT"
+   ],
+   "submissionOptions": [
+    "NO_DUPLICATES",
+    "TEMPORAL_SUBMISSION"
+   ],
+   "taskOptions": [],
+   "scoreOption": "KIS",
+   "configuration": {
+    "LIMIT_CORRECT_PER_TEAM.limit": "1"
+   }
+  }
+ ],
+ "taskGroups": [
+  {
+   "id": "19-0",
+   "name": "tkis",
+   "type": "Textual Known Item Search"
+  },
+  {
+   "id": "19-1",
+   "name": "qa-kis",
+   "type": "qa-kis"
+  },
+  {
+   "id": "19-2",
+   "name": "trake",
+   "type": "trake"
+  },
+  {
+   "id": "19-6",
+   "name": "vkis",
+   "type": "Visual Known Item Search"
+  }
+ ],
+ "tasks": [
+  {
+   "id": "367b9f77-39ff-42ae-9238-2225eff20b73",
+   "name": "qa-query-01",
+   "taskGroup": "qa-kis",
+   "taskType": "qa-kis",
+   "duration": 300,
+   "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+   "targets": [
+    {
+     "type": "TEXT",
+     "target": "QA-6-L25_V058-729000-930000"
+    }
+   ],
+   "hints": [
+    {
+     "type": "TEXT",
+     "start": 0,
+     "description": "Hỏi chữ số này là số mấy? Đây là câu 3 trong bài tập vận dụng. Các dữ kiện của đề bài bao gồm khoảng cách giữa AB là một số có 2 chữ số có chữ số hàng chục bằng chữ số hàng đơn vị. Chữ số này còn dùng để làm một điều kiện khác trong bài và được nêu ra ngay trong cùng câu mở đầu. Đáp án của bài là C. ",
+     "dataType": "text/plain"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "6b459ebe-02a0-4eec-962b-e815af8f5cac",
+   "name": "trake-query-01",
+   "taskGroup": "trake",
+   "taskType": "trake",
+   "duration": 300,
+   "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+   "targets": [
+    {
+     "type": "TEXT",
+     "target": "TR-L26_V176-4725,4875"
+    }
+   ],
+   "hints": [
+    {
+     "type": "TEXT",
+     "start": 0,
+     "description": "Đây là một cảnh nấu món cá.\nE1: Người đầu bếp khuấy một hỗn hợp nước sốt. Lấy khoảnh khắc người đầu bếp lấy muỗng chạm vào nước sốt lần đầu tiên.\nE2: Người đầu bếp rưới nước sốt vào nồi. Trong nồi có một khoanh cá và phía trên là 1 quả ớt. Miếng cá này được đặt lên trên các miếng thịt. Lấy khoảnh khắc nước sốt được cho hoàn toàn hết vào nồi.",
+     "dataType": "text/plain"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "09039b2c-92e4-4f31-b10d-08f9b00ea6d6",
+   "name": "tkis-query-01",
+   "taskGroup": "tkis",
+   "taskType": "Textual Known Item Search",
+   "duration": 300,
+   "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+   "targets": [
+    {
+     "type": "MEDIA_ITEM_TEMPORAL_RANGE",
+     "target": "1de7a6f7-46e6-47cc-9154-37c3eda6c1ab",
+     "range": {
+      "start": {
+       "value": "611000",
+       "unit": "MILLISECONDS"
+      },
+      "end": {
+       "value": "635000",
+       "unit": "MILLISECONDS"
+      }
+     },
+     "item": {
+      "mediaItemId": "1de7a6f7-46e6-47cc-9154-37c3eda6c1ab",
+      "name": "K05_V018",
+      "type": "VIDEO",
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "location": "K05_V018.mp4",
+      "durationMs": 846566,
+      "fps": 30
+     }
+    }
+   ],
+   "hints": [
+    {
+     "type": "TEXT",
+     "start": 0,
+     "end": 60,
+     "description": "Một con robot có 4 chân gắn với 4 bánh xe chạy trên đồng cỏ. ",
+     "dataType": "text/plain"
+    },
+    {
+     "type": "TEXT",
+     "start": 60,
+     "end": 120,
+     "description": "Cảnh sau có những con bò đứng kế bên con robot. ",
+     "dataType": "text/plain"
+    },
+    {
+     "type": "TEXT",
+     "start": 120,
+     "description": "Đoạn clip kết thúc bằng cảnh phỏng vấn người trong nhóm làm ra con robot để mô tả các phương thức hoạt động và sự hữu ích của nó.",
+     "dataType": "text/plain"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "d54d790e-0637-4fef-a0ee-0559e49fd9de",
+   "name": "tkis-query-02",
+   "taskGroup": "tkis",
+   "taskType": "Textual Known Item Search",
+   "duration": 300,
+   "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+   "targets": [
+    {
+     "type": "MEDIA_ITEM_TEMPORAL_RANGE",
+     "target": "9a182675-020a-4889-91f4-4497b4a6ab9f",
+     "range": {
+      "start": {
+       "value": "444000",
+       "unit": "MILLISECONDS"
+      },
+      "end": {
+       "value": "485000",
+       "unit": "MILLISECONDS"
+      }
+     },
+     "item": {
+      "mediaItemId": "9a182675-020a-4889-91f4-4497b4a6ab9f",
+      "name": "K14_V027",
+      "type": "VIDEO",
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "location": "K14_V027.mp4",
+      "durationMs": 1131866,
+      "fps": 30
+     }
+    }
+   ],
+   "hints": [
+    {
+     "type": "TEXT",
+     "start": 0,
+     "end": 60,
+     "description": "Đoạn clip ghi lại một lễ hội đèn lồng. Trên phố, nhiều người mặc hanbok diễu hành, mang theo đủ loại đèn lồng rực rỡ.",
+     "dataType": "text/plain"
+    },
+    {
+     "type": "TEXT",
+     "start": 60,
+     "end": 120,
+     "description": "Nổi bật ở giữa là một phụ nữ cầm hai đèn lồng tròn lớn màu cam, xung quanh có đèn lồng hình cá, tôm và nhiều kiểu dáng khác. ",
+     "dataType": "text/plain"
+    },
+    {
+     "type": "TEXT",
+     "start": 120,
+     "description": "Tiếp đó, xuất hiện một chiếc đèn lồng khổng lồ hình người trong trang phục truyền thống Hàn Quốc: áo tím viền vàng, váy xanh, hai tay nâng một đèn lồng nhỏ màu cam – xanh phát sáng rực rỡ.",
+     "dataType": "text/plain"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "2833f27e-5501-4f22-b781-99b0040b1ae0",
+   "name": "trake-query-02",
+   "taskGroup": "trake",
+   "taskType": "trake",
+   "duration": 300,
+   "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+   "targets": [
+    {
+     "type": "TEXT",
+     "target": "TR-K07_V025-22200,22260,22350"
+    }
+   ],
+   "hints": [
+    {
+     "type": "TEXT",
+     "start": 0,
+     "description": "Cảnh láp ráp trong một xưởng.\nE1: Một cánh tay rô bot đang lắp một cái khung cho một chiếc xe. Lấy khoảnh khắc cái khung chạm vào chiếc xe.\nE2: Một công nhân đang lắp gì đó rồi quay một cái tay xoay. Lấy khoảnh khắc tay xoay bắt đầu quay thiết bị.\nE3: Các công nhân đang lắp ráp cho cửa ô tô. Ở đây có một công nhân mặc áo đen. Lấy khoảnh khắc đầu tiên người công nhân này gấp cái khăn khi quay mặt lại hướng camera.",
+     "dataType": "text/plain"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "669ad2e6-e374-4222-bdcb-5dae0ee592f0",
+   "name": "qa-query-02",
+   "taskGroup": "qa-kis",
+   "taskType": "qa-kis",
+   "duration": 300,
+   "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+   "targets": [
+    {
+     "type": "TEXT",
+     "target": "QA-MARBURG-K02_V012-770000-808000"
+    }
+   ],
+   "hints": [
+    {
+     "type": "TEXT",
+     "start": 0,
+     "end": 60,
+     "description": "Tên của loại virus này là gì (viết in hoa)? Đoạn video về việc chế tạo vaccine phòng một loại virus. ",
+     "dataType": "text/plain"
+    },
+    {
+     "type": "TEXT",
+     "start": 60,
+     "description": "Tên của loại virus này là gì (viết in hoa)? Thông tin trong đoạn video cho biết virus này gây tỷ lệ tử vong (fatality rate) lên đến 88%.",
+     "dataType": "text/plain"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "5662af53-bb2c-4434-aa98-76f1f65306f9",
+   "name": "vkis-q01",
+   "taskGroup": "vkis",
+   "taskType": "Visual Known Item Search",
+   "duration": 240,
+   "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+   "targets": [
+    {
+     "type": "MEDIA_ITEM_TEMPORAL_RANGE",
+     "target": "9e550616-7e7b-451c-8ea4-9014d794f986",
+     "range": {
+      "start": {
+       "value": "348000",
+       "unit": "MILLISECONDS"
+      },
+      "end": {
+       "value": "358000",
+       "unit": "MILLISECONDS"
+      }
+     },
+     "item": {
+      "mediaItemId": "9e550616-7e7b-451c-8ea4-9014d794f986",
+      "name": "K17_V010",
+      "type": "VIDEO",
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "location": "K17_V010.mp4",
+      "durationMs": 1229000,
+      "fps": 30
+     }
+    }
+   ],
+   "hints": [
+    {
+     "type": "VIDEO",
+     "start": 0,
+     "end": 240,
+     "dataType": "video/mp4",
+     "item": {
+      "mediaItemId": "9e550616-7e7b-451c-8ea4-9014d794f986",
+      "name": "K17_V010",
+      "type": "VIDEO",
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "location": "K17_V010.mp4",
+      "durationMs": 1229000,
+      "fps": 30
+     },
+     "range": {
+      "start": {
+       "value": "348000",
+       "unit": "MILLISECONDS"
+      },
+      "end": {
+       "value": "358000",
+       "unit": "MILLISECONDS"
+      }
+     }
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "d2cbc6b3-0e84-4236-a0c7-8e28a0a3431c",
+   "name": "vkis-02",
+   "taskGroup": "vkis",
+   "taskType": "Visual Known Item Search",
+   "duration": 240,
+   "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+   "targets": [
+    {
+     "type": "MEDIA_ITEM_TEMPORAL_RANGE",
+     "target": "b46a32be-88ce-4393-b987-ea009b41b1df",
+     "range": {
+      "start": {
+       "value": "634000",
+       "unit": "MILLISECONDS"
+      },
+      "end": {
+       "value": "644000",
+       "unit": "MILLISECONDS"
+      }
+     },
+     "item": {
+      "mediaItemId": "b46a32be-88ce-4393-b987-ea009b41b1df",
+      "name": "K14_V002",
+      "type": "VIDEO",
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "location": "K14_V002.mp4",
+      "durationMs": 1083433,
+      "fps": 30
+     }
+    }
+   ],
+   "hints": [
+    {
+     "type": "VIDEO",
+     "start": 0,
+     "end": 240,
+     "dataType": "video/mp4",
+     "item": {
+      "mediaItemId": "b46a32be-88ce-4393-b987-ea009b41b1df",
+      "name": "K14_V002",
+      "type": "VIDEO",
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "location": "K14_V002.mp4",
+      "durationMs": 1083433,
+      "fps": 30
+     },
+     "range": {
+      "start": {
+       "value": "634000",
+       "unit": "MILLISECONDS"
+      },
+      "end": {
+       "value": "644000",
+       "unit": "MILLISECONDS"
+      }
+     }
+    }
+   ],
+   "comment": ""
+  }
+ ],
+ "teams": [
+  {
+   "id": "f8965a50-9eb7-476f-9292-bc644cb32649",
+   "name": "Tester",
+   "color": "#9800BF",
+   "users": [
+    {
+     "id": "09e4047e-e259-458d-bbfb-a0e84093fcfb",
+     "username": "thuc",
+     "role": "PARTICIPANT"
+    }
+   ]
+  }
+ ],
+ "teamGroups": [],
+ "judges": [],
+ "viewers": []
+}

@@ -2,6 +2,7 @@ package dev.dres.run.validation
 
 import dev.dres.data.model.submissions.*
 import dev.dres.run.validation.interfaces.AnswerSetValidator
+import kotlinx.dnq.query.iterator
 
 /**
  * A [AnswerSetValidator] class that validates textual submissions.

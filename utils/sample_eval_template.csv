@@ -1,0 +1,19 @@
+ID,QID,Query Type,Query Name,Description,Trans,Video Filename,Second Start,Second End,Ans,Note,Frame List
+1,1,qa,qa-query-01,Hỏi chữ số này là số mấy? Đây là câu 3 trong bài tập vận dụng. Các dữ kiện của đề bài bao gồm khoảng cách giữa AB là một số có 2 chữ số có chữ số hàng chục bằng chữ số hàng đơn vị. Chữ số này còn dùng để làm một điều kiện khác trong bài và được nêu ra ngay trong cùng câu mở đầu. Đáp án của bài là C. ,,L25_V058,729,930,6,,
+2,2,trake,trake-query-01,"Đây là một cảnh nấu món cá.
+E1: Người đầu bếp khuấy một hỗn hợp nước sốt. Lấy khoảnh khắc người đầu bếp lấy muỗng chạm vào nước sốt lần đầu tiên.
+E2: Người đầu bếp rưới nước sốt vào nồi. Trong nồi có một khoanh cá và phía trên là 1 quả ớt. Miếng cá này được đặt lên trên các miếng thịt. Lấy khoảnh khắc nước sốt được cho hoàn toàn hết vào nồi.",,L26_V176,,,,,4725;4875
+3,3,tkis,tkis-query-01,"Một con robot có 4 chân gắn với 4 bánh xe chạy trên đồng cỏ. 
+Cảnh sau có những con bò đứng kế bên con robot. 
+Đoạn clip kết thúc bằng cảnh phỏng vấn người trong nhóm làm ra con robot để mô tả các phương thức hoạt động và sự hữu ích của nó.",,K05_V018.mp4,611,635,,,
+4,4,tkis,tkis-query-02,"Đoạn clip ghi lại một lễ hội đèn lồng. Trên phố, nhiều người mặc hanbok diễu hành, mang theo đủ loại đèn lồng rực rỡ.
+Nổi bật ở giữa là một phụ nữ cầm hai đèn lồng tròn lớn màu cam, xung quanh có đèn lồng hình cá, tôm và nhiều kiểu dáng khác. 
+Tiếp đó, xuất hiện một chiếc đèn lồng khổng lồ hình người trong trang phục truyền thống Hàn Quốc: áo tím viền vàng, váy xanh, hai tay nâng một đèn lồng nhỏ màu cam – xanh phát sáng rực rỡ.",,K14_V027.mp4,444,485,,,
+5,5,trake,trake-query-02,"Cảnh láp ráp trong một xưởng.
+E1: Một cánh tay rô bot đang lắp một cái khung cho một chiếc xe. Lấy khoảnh khắc cái khung chạm vào chiếc xe.
+E2: Một công nhân đang lắp gì đó rồi quay một cái tay xoay. Lấy khoảnh khắc tay xoay bắt đầu quay thiết bị.
+E3: Các công nhân đang lắp ráp cho cửa ô tô. Ở đây có một công nhân mặc áo đen. Lấy khoảnh khắc đầu tiên người công nhân này gấp cái khăn khi quay mặt lại hướng camera.",,K07_V025,,,,,22200;22260;22350
+6,6,qa,qa-query-02,"Tên của loại virus này là gì (viết in hoa)? Đoạn video về việc chế tạo vaccine phòng một loại virus. 
+Tên của loại virus này là gì (viết in hoa)? Thông tin trong đoạn video cho biết virus này gây tỷ lệ tử vong (fatality rate) lên đến 88%.",,K02_V012,770,808,MARBURG,,
+7,7,vkis,vkis-q01,,,K17_V010.mp4,348,358,,,
+8,8,vkis,vkis-02,,,K14_V002.mp4,634,644,,,
