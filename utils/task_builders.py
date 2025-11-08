@@ -67,7 +67,7 @@ def build_tkis_task(row):
     # Map up to 3 hint pieces to the given ranges 0-60,60-120,120+ (seconds)
     accumulated_hints = []
     for i, hint_part in enumerate(hint_parts):
-        accumulated_hints.append(hint_part)
+        # accumulated_hints.append(hint_part)
         # If last hint, end = duration
         if i == len(hint_parts) - 1:
             end_time = int(row.get('duration') or 300)
@@ -77,7 +77,7 @@ def build_tkis_task(row):
             "type": "TEXT",
             "start": i * 60,
             "end": end_time,
-            "description": " ".join(accumulated_hints),
+            "description": hint_part,
             "dataType": "text/plain"
         })
 

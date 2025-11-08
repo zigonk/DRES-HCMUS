@@ -1,0 +1,378 @@
+{
+  "tasks": [
+    {
+      "id": "3bd488f1-a0c8-4abe-b432-34c2f56b60ed",
+      "name": "qa-query-01",
+      "taskGroup": "qa-kis",
+      "taskType": "qa-kis",
+      "duration": 300,
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "targets": [
+        {
+          "type": "TEXT",
+          "target": "QA-6-L25_V058-729000-930000"
+        }
+      ],
+      "hints": [
+        {
+          "type": "TEXT",
+          "start": 0,
+          "end": 300,
+          "description": "Hỏi chữ số này là số mấy? Đây là câu 3 trong bài tập vận dụng. Các dữ kiện của đề bài bao gồm khoảng cách giữa AB là một số có 2 chữ số có chữ số hàng chục bằng chữ số hàng đơn vị. Chữ số này còn dùng để làm một điều kiện khác trong bài và được nêu ra ngay trong cùng câu mở đầu. Đáp án của bài là C.",
+          "dataType": "text/plain"
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": "8ad385b8-aa59-4d05-bc8f-bf4acff17c40",
+      "name": "trake-query-01",
+      "taskGroup": "trake",
+      "taskType": "trake",
+      "duration": 300,
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "targets": [
+        {
+          "type": "TEXT",
+          "target": "TR-L26_V176-4725,4875"
+        }
+      ],
+      "hints": [
+        {
+          "type": "TEXT",
+          "start": 0,
+          "description": "Đây là một cảnh nấu món cá.\nE1: Người đầu bếp khuấy một hỗn hợp nước sốt. Lấy khoảnh khắc người đầu bếp lấy muỗng chạm vào nước sốt lần đầu tiên.\nE2: Người đầu bếp rưới nước sốt vào nồi. Trong nồi có một khoanh cá và phía trên là 1 quả ớt. Miếng cá này được đặt lên trên các miếng thịt. Lấy khoảnh khắc nước sốt được cho hoàn toàn hết vào nồi.",
+          "dataType": "text/plain"
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": "b59d824e-cfde-4b47-801d-e4fc612126aa",
+      "name": "tkis-01",
+      "taskGroup": "tkis",
+      "taskType": "Textual Known Item Search",
+      "duration": 300,
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "targets": [
+        {
+          "type": "MEDIA_ITEM_TEMPORAL_RANGE",
+          "range": {
+            "start": {
+              "value": "860000",
+              "unit": "MILLISECONDS"
+            },
+            "end": {
+              "value": "883000",
+              "unit": "MILLISECONDS"
+            }
+          },
+          "item": {
+            "name": "K02_V013",
+            "type": "VIDEO",
+            "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+            "location": "K02_V013.mp4"
+          }
+        }
+      ],
+      "hints": [
+        {
+          "type": "TEXT",
+          "start": 0,
+          "end": 60,
+          "description": "In the video, there is a group of about four people performing the same action, while another group of four is walking in a circle. Their product is placed into a pot of boiling water.\nTrong đoạn video, có một nhóm khoảng 4 người đang thực hiện một hành động giống nhau, một nhóm 4 người khác thì đang đi thành vòng tròn. Sản phẩm của họ được bỏ vào một nồi nước sôi.",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 60,
+          "end": 120,
+          "description": "At the end of the video, this group of 16 people (wearing white uniforms) is awarded a certificate at the ceremony.\nKết thúc video, nhóm 16 người này (mặc đồng phục trắng) đã được tặng giấy chứng nhận tại buổi lễ.",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 120,
+          "end": 180,
+          "description": "These people are making a type of noodle using an ingredient that comes from a tuber, one of the first domesticated crops from Peru (South America), which can be round/oval or long and slender.\nNhóm người này đang làm 1 loại sợi bún với nguyên liệu là 1 loại củ đầu tiên được thuần hóa từ Peru (Nam Mỹ), có hình tròn/bầu dục hoặc dài thuôn..",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 180,
+          "end": 300,
+          "description": "This is a video introducing the Guinness World Record for making the world’s longest potato noodle.\nĐây là video giới thiệu về kỷ lục Guiness về làm sợi bún khoai tây dài nhất thế giới",
+          "dataType": "text/plain"
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": "f2604d79-e682-43eb-92e0-af5f46f837ce",
+      "name": "tkis-query-02",
+      "taskGroup": "tkis",
+      "taskType": "Textual Known Item Search",
+      "duration": 300,
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "targets": [
+        {
+          "type": "MEDIA_ITEM_TEMPORAL_RANGE",
+          "range": {
+            "start": {
+              "value": "444000",
+              "unit": "MILLISECONDS"
+            },
+            "end": {
+              "value": "485000",
+              "unit": "MILLISECONDS"
+            }
+          },
+          "item": {
+            "name": "K14_V027",
+            "type": "VIDEO",
+            "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+            "location": "K14_V027.mp4"
+          }
+        }
+      ],
+      "hints": [
+        {
+          "type": "TEXT",
+          "start": 0,
+          "end": 60,
+          "description": "Đoạn clip ghi lại một lễ hội đèn lồng. Trên phố, nhiều người mặc hanbok diễu hành, mang theo đủ loại đèn lồng rực rỡ.",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 60,
+          "end": 120,
+          "description": "Nổi bật ở giữa là một phụ nữ cầm hai đèn lồng tròn lớn màu cam, xung quanh có đèn lồng hình cá, tôm và nhiều kiểu dáng khác.",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 120,
+          "end": 300,
+          "description": "Tiếp đó, xuất hiện một chiếc đèn lồng khổng lồ hình người trong trang phục truyền thống Hàn Quốc: áo tím viền vàng, váy xanh, hai tay nâng một đèn lồng nhỏ màu cam – xanh phát sáng rực rỡ.",
+          "dataType": "text/plain"
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": "d2244a57-961d-4893-aa75-f16da7f1ce91",
+      "name": "trake-query-02",
+      "taskGroup": "trake",
+      "taskType": "trake",
+      "duration": 300,
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "targets": [
+        {
+          "type": "TEXT",
+          "target": "TR-K07_V025-22200,22260,22350"
+        }
+      ],
+      "hints": [
+        {
+          "type": "TEXT",
+          "start": 0,
+          "description": "Cảnh láp ráp trong một xưởng.\nE1: Một cánh tay rô bot đang lắp một cái khung cho một chiếc xe. Lấy khoảnh khắc cái khung chạm vào chiếc xe.\nE2: Một công nhân đang lắp gì đó rồi quay một cái tay xoay. Lấy khoảnh khắc tay xoay bắt đầu quay thiết bị.\nE3: Các công nhân đang lắp ráp cho cửa ô tô. Ở đây có một công nhân mặc áo đen. Lấy khoảnh khắc đầu tiên người công nhân này gấp cái khăn khi quay mặt lại hướng camera.",
+          "dataType": "text/plain"
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": "bd81f3a7-4c19-43d5-8725-db35afaa0d75",
+      "name": "qa-query-02",
+      "taskGroup": "qa-kis",
+      "taskType": "qa-kis",
+      "duration": 300,
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "targets": [
+        {
+          "type": "TEXT",
+          "target": "QA-MARBURG-K02_V012-770000-808000"
+        }
+      ],
+      "hints": [
+        {
+          "type": "TEXT",
+          "start": 0,
+          "end": 60,
+          "description": "Tên của loại virus này là gì (viết in hoa)? Đoạn video về việc chế tạo vaccine phòng một loại virus.",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 60,
+          "end": 300,
+          "description": "Tên của loại virus này là gì (viết in hoa)? Thông tin trong đoạn video cho biết virus này gây tỷ lệ tử vong (fatality rate) lên đến 88%.",
+          "dataType": "text/plain"
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": "6832457b-b43e-431a-a2aa-890bc22c37fe",
+      "name": "vkis-q01",
+      "taskGroup": "vkis",
+      "taskType": "Visual Known Item Search",
+      "duration": 240,
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "targets": [
+        {
+          "type": "MEDIA_ITEM_TEMPORAL_RANGE",
+          "range": {
+            "start": {
+              "value": "348000",
+              "unit": "MILLISECONDS"
+            },
+            "end": {
+              "value": "358000",
+              "unit": "MILLISECONDS"
+            }
+          },
+          "item": {
+            "name": "K17_V010",
+            "type": "VIDEO",
+            "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+            "location": "K17_V010.mp4"
+          }
+        }
+      ],
+      "hints": [],
+      "comment": ""
+    },
+    {
+      "id": "15cf80ce-6075-40ac-a159-8378453f35da",
+      "name": "vkis-02",
+      "taskGroup": "vkis",
+      "taskType": "Visual Known Item Search",
+      "duration": 240,
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "targets": [
+        {
+          "type": "MEDIA_ITEM_TEMPORAL_RANGE",
+          "range": {
+            "start": {
+              "value": "634000",
+              "unit": "MILLISECONDS"
+            },
+            "end": {
+              "value": "644000",
+              "unit": "MILLISECONDS"
+            }
+          },
+          "item": {
+            "name": "K14_V002",
+            "type": "VIDEO",
+            "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+            "location": "K14_V002.mp4"
+          }
+        }
+      ],
+      "hints": [],
+      "comment": ""
+    },
+    {
+      "id": "308326f7-6cb3-42a2-9011-174dc5b68087",
+      "name": "qa-kis-308326f7",
+      "taskGroup": "qa-kis",
+      "taskType": "qa-kis",
+      "duration": 300,
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "targets": [
+        {
+          "type": "TEXT",
+          "target": "QA-6-K02_V016-1110000-1120000"
+        }
+      ],
+      "hints": [
+        {
+          "type": "TEXT",
+          "start": 0,
+          "end": 60,
+          "description": "At the 40th minute of the match between the team in white and the team in red, the score was 0–0.\nPhút 40 của trận đấu giữa đội áo trắng và đội áo đỏ, tỉ số trận đấu đang là 0 đều.",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 60,
+          "end": 120,
+          "description": "At that moment, a player from the red team took a shot into the goal guarded by the white team’s goalkeeper, who was wearing a blue jersey, making the score 1–0.\nLúc này cầu thủ đội áo đỏ tung cú sút vào khung thành đội áo trắng do thủ môn mặc áo màu xanh dương đang canh giữ nâng tỉ số lên 1-0.",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 120,
+          "end": 180,
+          "description": "At this time, inside the 16.5-meter box, there were 5 red-shirted players and some white-shirted players. How many white-shirted players were there?\nThời điểm này trong khu vực 16m50 có 5 cầu thủ áo đỏ và một số cầu thủ áo trắng. Số lượng cầu thủ áo trắng là bao nhiêu?",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 180,
+          "end": 300,
+          "description": "This is the 2026 World Cup Asian qualifier match between South Korea and Iraq.\nĐây là trận đấu vòng loại World Cup 2026 Châu Á giữa Hàn Quốc và Iraq",
+          "dataType": "text/plain"
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": "4c4ce34e-d098-499d-8733-08c55f0c699d",
+      "name": "vkis-query-10",
+      "taskGroup": "vkis",
+      "taskType": "Visual Known Item Search",
+      "duration": 240,
+      "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+      "targets": [
+        {
+          "type": "MEDIA_ITEM_TEMPORAL_RANGE",
+          "range": {
+            "start": {
+              "value": "695000",
+              "unit": "MILLISECONDS"
+            },
+            "end": {
+              "value": "741000",
+              "unit": "MILLISECONDS"
+            }
+          },
+          "item": {
+            "name": "L25_V084",
+            "type": "VIDEO",
+            "collectionId": "796ac77f-44de-44b8-8191-656395621088",
+            "location": "L25_V084.mp4"
+          }
+        }
+      ],
+      "hints": [
+        {
+          "type": "TEXT",
+          "start": 0,
+          "end": 60,
+          "description": "The video shows instructions on solving a multiple-choice exercise, with a question involving a substance reacting with a blue solution and releasing hydrogen gas.\nĐoạn video về việc hướng dẫn làm bài tập trắc nghiệm, câu hỏi liên quan đến việc một chất tác dụng với dung dịch màu xanh lam và giải phóng khí hidro.",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 60,
+          "end": 120,
+          "description": "The total atomic mass of the four metals given in the four answer choices is 130. The correct answer to this question is the metal with an atomic mass of 23.\nTổng nguyên tử khối của bốn kim loại đưa ra ở bốn đáp án là 130. Đáp án của câu hỏi này là kim loại có nguyên tử khối là 23.",
+          "dataType": "text/plain"
+        },
+        {
+          "type": "TEXT",
+          "start": 120,
+          "end": 240,
+          "description": "This is the reaction of an alkali metal (which plays an important role in the molecule of common salt) with CuSO₄\nĐây là phản ứng của 1 nguyên tố kim loại kiềm (đóng vai trò quan trọng trong phân tử muối ăn thông thường) với CuSO4",
+          "dataType": "text/plain"
+        }
+      ],
+      "comment": ""
+    }
+  ]
+}

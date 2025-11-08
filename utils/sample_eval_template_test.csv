@@ -1,0 +1,37 @@
+ID,QID,Query Type,Query Name,Description,Trans,Video Filename,Second Start,Second End,Ans,Note,Frame List
+1,1,qa,qa-query-01,Hỏi chữ số này là số mấy? Đây là câu 3 trong bài tập vận dụng. Các dữ kiện của đề bài bao gồm khoảng cách giữa AB là một số có 2 chữ số có chữ số hàng chục bằng chữ số hàng đơn vị. Chữ số này còn dùng để làm một điều kiện khác trong bài và được nêu ra ngay trong cùng câu mở đầu. Đáp án của bài là C.,,L25_V058,729,930,6,,
+2,2,trake,trake-query-01,"Đây là một cảnh nấu món cá.
+E1: Người đầu bếp khuấy một hỗn hợp nước sốt. Lấy khoảnh khắc người đầu bếp lấy muỗng chạm vào nước sốt lần đầu tiên.
+E2: Người đầu bếp rưới nước sốt vào nồi. Trong nồi có một khoanh cá và phía trên là 1 quả ớt. Miếng cá này được đặt lên trên các miếng thịt. Lấy khoảnh khắc nước sốt được cho hoàn toàn hết vào nồi.",,L26_V176,,,,,4725;4875
+3,3,tkis,tkis-01,"Trong đoạn video, có một nhóm khoảng 4 người đang thực hiện một hành động giống nhau, một nhóm 4 người khác thì đang đi thành vòng tròn. Sản phẩm của họ được bỏ vào một nồi nước sôi. 
+Kết thúc video, nhóm 16 người này (mặc đồng phục trắng) đã được tặng giấy chứng nhận tại buổi lễ. 
+Nhóm người này đang làm 1 loại sợi bún với nguyên liệu là 1 loại củ đầu tiên được thuần hóa từ Peru (Nam Mỹ), có hình tròn/bầu dục hoặc dài thuôn..
+Đây là video giới thiệu về kỷ lục Guiness về làm sợi bún khoai tây dài nhất thế giới","In the video, there is a group of about four people performing the same action, while another group of four is walking in a circle. Their product is placed into a pot of boiling water.
+At the end of the video, this group of 16 people (wearing white uniforms) is awarded a certificate at the ceremony.
+These people are making a type of noodle using an ingredient that comes from a tuber, one of the first domesticated crops from Peru (South America), which can be round/oval or long and slender.
+This is a video introducing the Guinness World Record for making the world’s longest potato noodle.",K02_V013.mp4,860,883,,,
+4,4,tkis,tkis-query-02,"Đoạn clip ghi lại một lễ hội đèn lồng. Trên phố, nhiều người mặc hanbok diễu hành, mang theo đủ loại đèn lồng rực rỡ.
+Nổi bật ở giữa là một phụ nữ cầm hai đèn lồng tròn lớn màu cam, xung quanh có đèn lồng hình cá, tôm và nhiều kiểu dáng khác. 
+Tiếp đó, xuất hiện một chiếc đèn lồng khổng lồ hình người trong trang phục truyền thống Hàn Quốc: áo tím viền vàng, váy xanh, hai tay nâng một đèn lồng nhỏ màu cam – xanh phát sáng rực rỡ.",,K14_V027.mp4,444,485,,,
+5,5,trake,trake-query-02,"Cảnh láp ráp trong một xưởng.
+E1: Một cánh tay rô bot đang lắp một cái khung cho một chiếc xe. Lấy khoảnh khắc cái khung chạm vào chiếc xe.
+E2: Một công nhân đang lắp gì đó rồi quay một cái tay xoay. Lấy khoảnh khắc tay xoay bắt đầu quay thiết bị.
+E3: Các công nhân đang lắp ráp cho cửa ô tô. Ở đây có một công nhân mặc áo đen. Lấy khoảnh khắc đầu tiên người công nhân này gấp cái khăn khi quay mặt lại hướng camera.",,K07_V025,,,,,22200;22260;22350
+6,6,qa,qa-query-02,"Tên của loại virus này là gì (viết in hoa)? Đoạn video về việc chế tạo vaccine phòng một loại virus. 
+Tên của loại virus này là gì (viết in hoa)? Thông tin trong đoạn video cho biết virus này gây tỷ lệ tử vong (fatality rate) lên đến 88%.",,K02_V012,770,808,MARBURG,,
+7,7,vkis,vkis-q01,,,K17_V010.mp4,348,358,,,
+8,8,vkis,vkis-02,,,K14_V002.mp4,634,644,,,
+,9,qa,,"Phút 40 của trận đấu giữa đội áo trắng và đội áo đỏ, tỉ số trận đấu đang là 0 đều.
+Lúc này cầu thủ đội áo đỏ tung cú sút vào khung thành đội áo trắng do thủ môn mặc áo màu xanh dương đang canh giữ nâng tỉ số lên 1-0. 
+Thời điểm này trong khu vực 16m50 có 5 cầu thủ áo đỏ và một số cầu thủ áo trắng. Số lượng cầu thủ áo trắng là bao nhiêu? 
+Đây là trận đấu vòng loại World Cup 2026 Châu Á giữa Hàn Quốc và Iraq","At the 40th minute of the match between the team in white and the team in red, the score was 0–0. 
+At that moment, a player from the red team took a shot into the goal guarded by the white team’s goalkeeper, who was wearing a blue jersey, making the score 1–0. 
+At this time, inside the 16.5-meter box, there were 5 red-shirted players and some white-shirted players. How many white-shirted players were there?
+This is the 2026 World Cup Asian qualifier match between South Korea and Iraq.",K02_V016.mp4,1110,1120,6,,
+,10,vkis,vkis-query-10,"Đoạn video về việc hướng dẫn làm bài tập trắc nghiệm, câu hỏi liên quan đến việc một chất tác dụng với dung dịch màu xanh lam và giải phóng khí hidro. 
+Tổng nguyên tử khối của bốn kim loại đưa ra ở bốn đáp án là 130. Đáp án của câu hỏi này là kim loại có nguyên tử khối là 23.
+Đây là phản ứng của 1 nguyên tố kim loại kiềm (đóng vai trò quan trọng trong phân tử muối ăn thông thường) với CuSO4","The video shows instructions on solving a multiple-choice exercise, with a question involving a substance reacting with a blue solution and releasing hydrogen gas.
+
+The total atomic mass of the four metals given in the four answer choices is 130. The correct answer to this question is the metal with an atomic mass of 23.
+
+This is the reaction of an alkali metal (which plays an important role in the molecule of common salt) with CuSO₄",L25_V084.mp4,695,741,,,
